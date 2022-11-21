@@ -6,7 +6,7 @@ app.use(express.static(process.cwd() + "/images/"));
 app.use(express.static(process.cwd() + "/images/imgeAfteEdit"));
 
 app.get("/", (req, res) => {
-  res.send("bad request try /api");
+  res.send("Bad Request try /api");
 });
 app.get("/api", routes);
 
