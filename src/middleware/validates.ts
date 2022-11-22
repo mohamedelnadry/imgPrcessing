@@ -1,16 +1,19 @@
 import { Request, Response, NextFunction } from "express";
-const fs = require("fs");
+import fs from 'fs'
 export const validatequery = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const { imgname, width, height } = req.query;
+  const widthnum = Number(width);
+  const heightnum = Number(height);
+
   if (imgname == undefined || imgname == "") {
     res.send("imgname or params not found or null");
-  } else if (width == undefined || width == "") {
+  } else if (Number.isNaN(widthnum) || widthnum <= 0) {
     res.send("params not found or null");
-  } else if (height == undefined || height == "") {
+  } else if (Number.isNaN(heightnum) || heightnum <= 0) {
     res.send("parms not found or null");
   } else {
     next();
@@ -22,13 +25,23 @@ export const validatefile = (
   next: NextFunction
 ) => {
   if (!fs.existsSync(`${process.cwd()}/imgeAfteEdit`)) {
-    fs.mkdir(
+    fs.mkdirSync(
       `${process.cwd()}/images/imgeAfteEdit`,
-      { recursive: true },
-      (err: Error) => {
-        return err;
-      }
+      { recursive: true }
     );
+    next();
+  }
+};
+export const validateimg = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { imgname } = req.query;
+
+  if (!fs.existsSync(`${process.cwd()}/images/${imgname}`)) {
+    res.send("imge not found");
+  } else {
     next();
   }
 };

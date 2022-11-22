@@ -24,6 +24,7 @@
     "@types/sharp": "^0.31.0",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.44.0",
     "eslint": "^8.28.0",
     "jasmine": "^4.5.0",
     "jasmine-spec-reporter": "^7.0.0",
